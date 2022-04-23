@@ -1,0 +1,11 @@
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.json
+*.ipch
+*.suo
+*.VC.db
+AESAlgorithm/AESAlgorithm/x64/Debug/
+AESAlgorithm/x64/Debug/
+
