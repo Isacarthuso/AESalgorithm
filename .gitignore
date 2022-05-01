@@ -6,6 +6,7 @@
 *.ipch
 *.suo
 *.VC.db
+*.vs
 AESAlgorithm/AESAlgorithm/x64/Debug/
 AESAlgorithm/x64/Debug/
 
