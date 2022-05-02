@@ -55,7 +55,7 @@ std::vector<unsigned char> AES::Encrypt(std::string to_encrypt, std::string key)
 	xorcalc();
 
 	//Sub-Bytes:
-	char mapSbox[15];
+	unsigned char mapSbox[16];
 
 	for (int i = 0; i < 15; i++) {
 
@@ -67,12 +67,51 @@ std::vector<unsigned char> AES::Encrypt(std::string to_encrypt, std::string key)
 	//std::bitset<8> RowColumn(XorAddRoundKey[0]);
 	//std::cout << XorAddRoundKey[2] << '\n';
 	//std::cout << RowColumn << std::endl;
-
 	//uint8_t t = RowColumn.to_ulong();
 	//uint8_t column = (( RowColumn.to_ulong()&0b11110000 ) >> 4 );
 	//uint8_t row = ( RowColumn.to_ulong() & 0b00001111 );
 	//printf("\n%d", column);
 	//printf("\n%d", row);
+
+	//Shift Rows
+
+	//2nd row
+	unsigned char memory1 = mapSbox[4];
+	unsigned char memory2 = mapSbox[5];
+	unsigned char memory3 = mapSbox[6];
+	unsigned char memory4 = mapSbox[7];
+
+	mapSbox[4] = memory4;
+	mapSbox[5] = memory3;
+	mapSbox[6] = memory2;
+	mapSbox[7] = memory1;
+
+	//3rd row
+	memory1 = mapSbox[8];
+	memory2 = mapSbox[9];
+	memory3 = mapSbox[10];
+	memory4 = mapSbox[11];
+
+	mapSbox[8]  = memory3;
+	mapSbox[9]  = memory4;
+	mapSbox[10] = memory1;
+	mapSbox[11] = memory2;
+
+	//4th row
+	memory1 = mapSbox[12];
+	memory2 = mapSbox[13];
+	memory3 = mapSbox[14];
+	memory4 = mapSbox[15];
+
+	mapSbox[12] = memory4;
+	mapSbox[13] = memory1;
+	mapSbox[14] = memory2;
+	mapSbox[15] = memory3;
+
+
+
+	
+
 
 
 
