@@ -18,6 +18,13 @@ public:
 
 };
 
+const unsigned char MixColumnConstMatrix[16]
+{/* 0    1    2    3 */
+   0x63,0x7c,0x77,0x7b,/*0*/
+   0xf2,0x6b,0x6f,0xc5,/*1*/
+   0x30,0x01,0x67,0x2b,/*2*/
+   0xfe,0xd7,0xab,0x76 /*3*/
+};
 
 const std::vector<std::vector<uint8_t> > postsBox
 {/* 0  1   2   3   4   5   6   7   8   9   a   b   c   d   e   f */

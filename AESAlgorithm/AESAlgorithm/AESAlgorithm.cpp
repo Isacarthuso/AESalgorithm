@@ -108,9 +108,36 @@ std::vector<unsigned char> AES::Encrypt(std::string to_encrypt, std::string key)
 	mapSbox[14] = memory2;
 	mapSbox[15] = memory3;
 
+	//Mix-Columns
+
+	auto mult = [&mapSbox](int pline, int pcolumn) -> char {return MixColumnConstMatrix[pline] * mapSbox[pcolumn]; };
 
 
+unsigned char MixColumntMatrix[16]
+	{/* 0    1    2    3 */
+	  mult(0,0) + mult(0,4) + mult(0,8)  + mult(0,12),
+	  mult(0,1) + mult(0,5) + mult(0,9)  + mult(0,13),
+	  mult(0,2) + mult(0,6) + mult(0,10) + mult(0,14),
+	  mult(0,3) + mult(0,7) + mult(0,11) + mult(0,15),
+
+	  mult(4,0) + mult(4,4) + mult(4,8)  + mult(4,12),
+	  mult(4,1) + mult(4,5) + mult(4,9)  + mult(4,13),
+	  mult(4,2) + mult(4,6) + mult(4,10) + mult(4,14),
+	  mult(4,3) + mult(4,7) + mult(4,11) + mult(4,15),
 	
+
+	  mult(8,0) + mult(8,4) + mult(8,8)  + mult(8,12),
+	  mult(8,1) + mult(8,5) + mult(8,9)  + mult(8,13),
+	  mult(8,2) + mult(8,6) + mult(8,10) + mult(8,14),
+	  mult(8,3) + mult(8,7) + mult(8,11) + mult(8,15),
+	 
+
+	  mult(12,0) + mult(12,4) + mult(12,8)  + mult(12,12),
+	  mult(12,1) + mult(12,5) + mult(12,9)  + mult(12,13),
+	  mult(12,2) + mult(12,6) + mult(12,10) + mult(12,14),
+	  mult(12,3) + mult(12,7) + mult(12,11) + mult(12,15),
+
+	};
 
 
 
