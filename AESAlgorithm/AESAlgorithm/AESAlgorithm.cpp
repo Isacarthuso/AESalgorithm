@@ -125,7 +125,6 @@ unsigned char MixColumntMatrix[16]
 	  mult(4,2) + mult(4,6) + mult(4,10) + mult(4,14),
 	  mult(4,3) + mult(4,7) + mult(4,11) + mult(4,15),
 	
-
 	  mult(8,0) + mult(8,4) + mult(8,8)  + mult(8,12),
 	  mult(8,1) + mult(8,5) + mult(8,9)  + mult(8,13),
 	  mult(8,2) + mult(8,6) + mult(8,10) + mult(8,14),

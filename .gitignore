@@ -7,6 +7,11 @@
 *.suo
 *.VC.db
 *.vs
+pch.cpp
+pch.h
+*.config
+packages
+AESAlgorithm/AESTestSuite/x64/
 AESAlgorithm/AESAlgorithm/x64/Debug/
 AESAlgorithm/x64/Debug/
 
