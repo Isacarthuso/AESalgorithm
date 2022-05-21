@@ -130,7 +130,6 @@ unsigned char MixColumntMatrix[16]
 	  mult(8,2) + mult(8,6) + mult(8,10) + mult(8,14),
 	  mult(8,3) + mult(8,7) + mult(8,11) + mult(8,15),
 	 
-
 	  mult(12,0) + mult(12,4) + mult(12,8)  + mult(12,12),
 	  mult(12,1) + mult(12,5) + mult(12,9)  + mult(12,13),
 	  mult(12,2) + mult(12,6) + mult(12,10) + mult(12,14),
@@ -182,4 +181,19 @@ unsigned char MixColumntMatrix[16]
 	//AddRoundKey = AES::SubBytes(to_encrypt, key);
 
 	return std::vector<unsigned char>();
+}
+
+bool AES::SetKeyBits(uint16_t keybitsnumb)
+{
+	key_bits_numb = keybitsnumb;
+
+	if (key_bits_numb == 128 || key_bits_numb == 192 || key_bits_numb == 256)
+		return true;
+	else
+		return false;
+}
+
+bool AES::Setkey(std::string key)
+{
+	return false;
 }

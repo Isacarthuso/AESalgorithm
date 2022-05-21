@@ -1,9 +1,24 @@
 #include "pch.h"
 #include"gtest/gtest.h"
+#include"AESalgorithm.h"
+#include"AESalgorithm.cpp"
 
-TEST(TestCaseName, TestName) {
-	EXPECT_EQ(1, 1);
-	EXPECT_TRUE(true);
+TEST(SetUpEncryption, Setbitsnumber) {
+
+	AES Encryption;
+	Encryption.SetKeyBits(128);
+
+	EXPECT_TRUE(Encryption.SetKeyBits(128));
+
+	EXPECT_FALSE(Encryption.SetKeyBits(1));
+
+	EXPECT_TRUE(Encryption.SetKeyBits(192));
+
+	EXPECT_FALSE(Encryption.SetKeyBits(30));
+
+	EXPECT_TRUE(Encryption.SetKeyBits(256));
+
+	EXPECT_FALSE(Encryption.SetKeyBits(-1));
 }
 
 int main(int argc, char** argv) {

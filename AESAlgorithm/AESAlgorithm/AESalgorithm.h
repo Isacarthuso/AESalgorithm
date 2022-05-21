@@ -9,12 +9,17 @@
 class AES {
 
 private:
+	uint16_t key_bits_numb;
 	std::vector<unsigned char> plaintextXORkey;
-
 	std::vector<unsigned char> SubBytes(std::string plaintext, std::string key);
 	
 public:
 	std::vector<unsigned char> Encrypt(std::string to_encrypt, std::string key);
+	bool SetKeyBits(uint16_t keybitsnumb);
+	bool Setkey(std::string key);
+	AES() {
+		key_bits_numb = 0;
+	};
 
 };
 
