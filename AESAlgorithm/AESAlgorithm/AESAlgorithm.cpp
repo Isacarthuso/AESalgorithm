@@ -185,15 +185,74 @@ unsigned char MixColumntMatrix[16]
 
 bool AES::SetKeyBits(uint16_t keybitsnumb)
 {
-	key_bits_numb = keybitsnumb;
+	
 
-	if (key_bits_numb == 128 || key_bits_numb == 192 || key_bits_numb == 256)
+	if (keybitsnumb == 128 || keybitsnumb == 192 || keybitsnumb == 256) {
+		key_bits_numb = keybitsnumb;
 		return true;
+	}
+		
 	else
 		return false;
 }
 
-bool AES::Setkey(std::string key)
+int16_t AES::Setkey(std::string key)
 {
-	return false;
+	
+	if (key.size() * bits8 == key_bits_numb) {
+
+		key_ = key;
+	}
+	
+	return ((key.size() * bits8) - key_bits_numb)/ bits8;
+}
+
+int8_t AES::SetPlainText(std::string plaintext)
+{
+	uint8_t rest;
+	uint8_t numbers_packs = 0;
+	
+	if(key_bits_numb == 0)
+		return -1;
+
+	else {
+
+		rest = plaintext.size() % 16;
+		std::cout <<"size"<< plaintext.size() << std::endl;
+		if (rest == 0) {
+
+			numbers_packs = plaintext.size() / 16;
+		}
+
+		else {
+
+			numbers_packs = ((plaintext.size() / 16) + 1 );
+
+		}
+		size_t pintial = 0, pfinal = 0;
+
+		for (uint8_t i = 0; i < numbers_packs; i++) {
+
+				pintial = i * 16;
+				str_pack.push_back(plaintext.substr(pintial, 16));
+		}
+
+		std::string lastPack;
+		lastPack = str_pack.back();
+		if (lastPack.size() < 16) {
+
+		}
+
+		return numbers_packs;
+	}
+}
+
+std::vector<std::string> AES::GetPack(void)
+{
+	return str_pack;
+}
+
+void AES::CleanPacks(void)
+{
+	str_pack.clear();
 }

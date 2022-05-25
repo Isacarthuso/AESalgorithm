@@ -9,14 +9,20 @@
 class AES {
 
 private:
+	const uint8_t bits8 = 8;
 	uint16_t key_bits_numb;
+	std::string key_;
+	std::vector<std::string> str_pack;
 	std::vector<unsigned char> plaintextXORkey;
 	std::vector<unsigned char> SubBytes(std::string plaintext, std::string key);
 	
 public:
 	std::vector<unsigned char> Encrypt(std::string to_encrypt, std::string key);
 	bool SetKeyBits(uint16_t keybitsnumb);
-	bool Setkey(std::string key);
+	int16_t Setkey(std::string key);
+	int8_t SetPlainText(std::string plaintext);
+	std::vector<std::string> GetPack(void);
+	void CleanPacks(void);
 	AES() {
 		key_bits_numb = 0;
 	};
