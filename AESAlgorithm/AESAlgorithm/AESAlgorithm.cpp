@@ -239,11 +239,16 @@ int8_t AES::SetPlainText(std::string plaintext)
 
 		std::string lastPack;
 		lastPack = str_pack.back();
+		uint8_t number_element = lastPack.size();
 		if (lastPack.size() < 16) {
-
+			for(uint8_t i = 0; i < (16 - number_element); i++) {
+				lastPack.append("#");
+			}
 		}
 
-		return numbers_packs;
+		str_pack.pop_back();
+		str_pack.push_back(lastPack);
+		return numbers_packs;   
 	}
 }
 
