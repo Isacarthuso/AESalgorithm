@@ -1,30 +1,52 @@
 #pragma once
 
+#include "Encrypt.h"
 #include <vector>
 #include <iostream>
 #include <string>
 #include <memory>
 #include <bitset>
+#include <algorithm> 
+#include <thread>
+
 
 class AES {
 
 private:
+	// Variables
 	const uint8_t bits8 = 8;
 	uint16_t key_bits_numb;
 	std::string key_;
 	std::vector<std::string> str_pack;
+	char round_key[15];
 	std::vector<unsigned char> plaintextXORkey;
+
+	//Functions
+	
 	std::vector<unsigned char> SubBytes(std::string plaintext, std::string key);
+
+	void  EncryptForward(int a);
 	
 public:
 	std::vector<unsigned char> Encrypt(std::string to_encrypt, std::string key);
+
 	bool SetKeyBits(uint16_t keybitsnumb);
+
 	int16_t Setkey(std::string key);
+
 	int8_t SetPlainText(std::string plaintext);
+
+	std::vector<int> XorAddRoundKey(std::string* PlainText, std::string* key);
+
 	std::vector<std::string> GetPack(void);
+
+	void GetXorAddRoundKey(char* roundKey);
+
 	void CleanPacks(void);
 	AES() {
 		key_bits_numb = 0;
+
+	
 	};
 
 };

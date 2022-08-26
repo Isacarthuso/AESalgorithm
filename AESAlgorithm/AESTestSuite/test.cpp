@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include"gtest/gtest.h"
 #include"AESalgorithm.h"
 #include"AESalgorithm.cpp"
@@ -20,19 +20,21 @@ TEST(SetUpEncryption, Setbitsnumber) {
 
 	EXPECT_FALSE(Encryption.SetKeyBits(-1));
 }
-
 TEST(SetUpEncryption, SetKey)
 {
 	AES Encryption;
 	Encryption.SetKeyBits(128);
 	Encryption.Setkey("ABCDEFGHIJLMNOPQ");
-	
+	//key set is accordind to the SetKeyBits
 	EXPECT_EQ(0,Encryption.Setkey("ABCDEFGHIJLMNOPQ"));
 
+	//key set there is +1 char according to the SetKeyBits
 	EXPECT_EQ(1, Encryption.Setkey("ABCDEFGHIJL MNOPQ"));
 
+	//key set there is -1 char according to the SetKeyBits
 	EXPECT_EQ(-1, Encryption.Setkey("ABCDEFGHIJL MNO"));
 
+	//key set there is +10 chars according to the SetKeyBits
 	EXPECT_EQ(10, Encryption.Setkey("ABCDEFGHIJLMNOPQPOJIUYTRDF"));
 
 }
@@ -42,21 +44,21 @@ TEST(SetUpEncryption, checkPacks) {
 
 	std::vector<std::string> packs; 
 	std::string pack;
-	std::string key;
+	std::string PlainText;
 	
 
-	//key = "1234567891011121314151617181920";
-	//EXPECT_EQ(2, Encryption.SetPlainText(key));
-	//packs = Encryption.GetPack();
-	//pack = packs.at(0);
-	//EXPECT_TRUE("1234567891011121" == pack);
-	//pack = packs.at(1);
-	//EXPECT_TRUE("314151617181920#" == pack);
+	PlainText = "1234567891011121314151617181920";
+	EXPECT_EQ(2, Encryption.SetPlainText(PlainText));
+	packs = Encryption.GetPack();
+	pack = packs.at(0);
+	EXPECT_TRUE("1234567891011121" == pack);
+	pack = packs.at(1);
+	EXPECT_TRUE("314151617181920#" == pack);
 
 	Encryption.CleanPacks();
 
-	key = "oplmh6ygvcfhkpoi314151617181920wyterstyuiokmnbsdftu";
-	EXPECT_EQ(4, Encryption.SetPlainText(key));
+	PlainText = "oplmh6ygvcfhkpoi314151617181920wyterstyuiokmnbsdftu";
+	EXPECT_EQ(4, Encryption.SetPlainText(PlainText));
 	packs = Encryption.GetPack();
 	pack = packs.at(0);
 	EXPECT_TRUE("oplmh6ygvcfhkpoi" == pack);
@@ -69,11 +71,48 @@ TEST(SetUpEncryption, checkPacks) {
 
 	Encryption.CleanPacks();
 
-	key = "trtyuioplknbvfgd";
-	EXPECT_EQ(1, Encryption.SetPlainText(key));
+	PlainText = "trtyuioplknbvfgd";
+	EXPECT_EQ(1, Encryption.SetPlainText(PlainText));
 	packs = Encryption.GetPack();
 	pack = packs.at(0);
 	EXPECT_TRUE("trtyuioplknbvfgd" == pack);
+
+	Encryption.CleanPacks();
+
+	PlainText = "trtyuioplknbv";
+	EXPECT_EQ(1, Encryption.SetPlainText(PlainText));
+	packs = Encryption.GetPack();
+	pack = packs.at(0);
+	EXPECT_TRUE("trtyuioplknbv###" == pack);
+
+}
+
+TEST(SetUpEncryption, roundKey) {
+
+	AES Encryption;
+
+	std::vector<int> xorResult;
+
+	std::string key       = "f&rLum11111111A";
+
+	std::string PlainText = "2%0rp511111111b";
+
+	xorResult = Encryption.XorAddRoundKey(&PlainText, &key);
+
+	std::cout << "Xor Result: " << xorResult.at(0) << std::endl;
+	EXPECT_TRUE(xorResult.at(0) == 84);
+
+	//EXPECT_TRUE(xorResult.at(1) == '');
+
+	//EXPECT_TRUE(xorResult.at(2) == 'B');
+
+	//EXPECT_TRUE(xorResult.at(3) == '>');
+	//
+
+	//EXPECT_TRUE(xorResult.at(4) == '|');
+
+	//EXPECT_TRUE(xorResult.at(5) == 'X');
+	
 
 }
 
