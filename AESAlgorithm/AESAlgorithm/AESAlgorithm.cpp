@@ -35,23 +35,28 @@ char buffer[20];
 std::string str("Test string...");
 std::size_t length = str.copy(buffer, 6, 5);
 
-std::vector<int> AES::XorAddRoundKey(std::string* PlainText, std::string* key) {
+std::vector<unsigned char> AES::XorAddRoundKey(std::string* PlainText, std::string* Userkey) {
 
-	std::vector<int> xorResult, numPlainText, numKey;
+	char* ptr_char_plain_text;
+	char* ptr_char_key;
+	std::string plain_text, cp_key;
 
-	for (int i = 0; i < 15; i++) {
+	plain_text = *PlainText;
 
-		//numPlainText.push_back(std::stoi(&PlainText->at(i)));
-		//numKey.push_back(std::stoi(&key->at(i)));
+	cp_key = *Userkey;
 
-		//numPlainText.push_back(std::stoi("f",nullptr,10));
-		//numKey.push_back(std::stoi("2", nullptr, 10));
+	ptr_char_plain_text = &plain_text[0];
+
+	ptr_char_key = &cp_key[0];
+	
+	std::vector<unsigned char> xorResult;
+
+	for (int i = 0; i < Userkey->size(); i++)
+	{
+		xorResult.push_back(ptr_char_plain_text[i] ^ ptr_char_key[i]);
 
 	}
-	
-	//auto xorcalc = [&]()->void { for (int i = 0; i < 15; i++) { xorResult.push_back(numPlainText.at(i) ^ numKey.at(i)); } };
-	//
-	//xorcalc();
+
 
 	return xorResult;
 

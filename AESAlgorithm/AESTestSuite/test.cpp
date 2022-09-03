@@ -91,29 +91,23 @@ TEST(SetUpEncryption, roundKey) {
 
 	AES Encryption;
 
-	std::vector<int> xorResult;
+	std::vector<unsigned char> xorResult;
 
 	std::string key       = "f&rLum11111111A";
 
-	std::string PlainText = "2%0rp511111111b";
+	std::string PlainText = "2#0rp511111111b";
 
 	xorResult = Encryption.XorAddRoundKey(&PlainText, &key);
 
-	std::cout << "Xor Result: " << xorResult.at(0) << std::endl;
-	EXPECT_TRUE(xorResult.at(0) == 84);
+	EXPECT_TRUE(+xorResult.at(0) == 84);
 
-	//EXPECT_TRUE(xorResult.at(1) == '');
+	EXPECT_TRUE(+xorResult.at(1) == 5);
 
-	//EXPECT_TRUE(xorResult.at(2) == 'B');
+	EXPECT_TRUE(+xorResult.at(2) == 66);
 
-	//EXPECT_TRUE(xorResult.at(3) == '>');
-	//
+	EXPECT_TRUE(+xorResult.at(3) == 62);
 
-	//EXPECT_TRUE(xorResult.at(4) == '|');
-
-	//EXPECT_TRUE(xorResult.at(5) == 'X');
-	
-
+	EXPECT_TRUE(+xorResult.at(14) == 35);
 }
 
 int main(int argc, char** argv) {

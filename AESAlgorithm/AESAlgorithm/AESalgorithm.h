@@ -36,7 +36,7 @@ public:
 
 	int8_t SetPlainText(std::string plaintext);
 
-	std::vector<int> XorAddRoundKey(std::string* PlainText, std::string* key);
+	std::vector<unsigned char> XorAddRoundKey(std::string* PlainText, std::string* Userkey);
 
 	std::vector<std::string> GetPack(void);
 
