@@ -110,6 +110,30 @@ TEST(SetUpEncryption, roundKey) {
 	EXPECT_TRUE(+xorResult.at(14) == 35);
 }
 
+TEST(SetUpEncryption, subbytes) {
+
+	AES Encryption;//{'f','&','r','L'};
+
+	std::vector<unsigned char> subbytes;
+
+	subbytes.push_back('&');
+	subbytes.push_back('L');
+	subbytes.push_back('%');
+
+	int t = 3;
+
+	subbytes = Encryption.SubBytes(subbytes);
+
+	EXPECT_TRUE(+subbytes.at(0) == 247);
+
+	EXPECT_TRUE(+subbytes.at(1) == 41);
+
+	EXPECT_TRUE(+subbytes.at(2) == 63);
+
+}
+
+
+
 int main(int argc, char** argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

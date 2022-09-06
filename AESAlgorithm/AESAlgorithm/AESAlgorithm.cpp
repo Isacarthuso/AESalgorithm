@@ -1,39 +1,30 @@
 #include"AESalgorithm.h"
 
 
-std::vector<unsigned char> AES::SubBytes(std::string plaintext, std::string key)
-{
-
-	////Xor add RoundKey
-	//auto xorcalc = [=]()->void { for (int i = 0; i < 15; i++) { plaintextXORkey.push_back((int)plaintext[i] ^ key[i]);} };
-
-
-	////SubBytes
-	// std::vector<uint8_t> map_sbox;
-	// uint8_t column;
-	// uint8_t line;
-
-	// for (auto itr : plaintextXORkey) {
-
-	//	 column = itr & 0b00001111;
-	//	 line   = itr & 0b11110000;
-	//	 map_sbox.push_back(sBox[line][column]);
-	// }
-
-	// //Shift Rows
-
-
-	return  std::vector<unsigned char>();
-}
-
 void AES::EncryptForward(int a)
 {
 	std::cout << "Thread: " << a << std::endl;
 }
 
-char buffer[20];
-std::string str("Test string...");
-std::size_t length = str.copy(buffer, 6, 5);
+
+std::vector<unsigned char> AES::SubBytes(std::vector<unsigned char> XorAddRoundKey) {
+
+	//SubBytes
+	std::vector<unsigned char> map_sbox;
+
+	uint8_t column;
+	uint8_t line;
+	for (auto i : XorAddRoundKey){
+
+		std::cout << "RoundKey: " << +i<< std::endl;
+		column = static_cast<uint8_t>(i & 0b00001111);
+		line = (static_cast<uint8_t>(i & 0b11110000)) >> 4;
+		map_sbox.push_back(sBox[postsBox[line][column]]);
+
+	}
+
+	return map_sbox;
+}
 
 std::vector<unsigned char> AES::XorAddRoundKey(std::string* PlainText, std::string* Userkey) {
 
@@ -54,13 +45,13 @@ std::vector<unsigned char> AES::XorAddRoundKey(std::string* PlainText, std::stri
 	for (int i = 0; i < Userkey->size(); i++)
 	{
 		xorResult.push_back(ptr_char_plain_text[i] ^ ptr_char_key[i]);
-
 	}
 
 
 	return xorResult;
 
 }
+
 
 
 std::vector<unsigned char> AES::Encrypt(std::string to_encrypt, std::string key)

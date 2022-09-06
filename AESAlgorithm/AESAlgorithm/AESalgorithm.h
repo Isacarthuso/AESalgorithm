@@ -23,7 +23,6 @@ private:
 
 	//Functions
 	
-	std::vector<unsigned char> SubBytes(std::string plaintext, std::string key);
 
 	void  EncryptForward(int a);
 	
@@ -36,6 +35,8 @@ public:
 
 	int8_t SetPlainText(std::string plaintext);
 
+	std::vector<unsigned char> SubBytes(std::vector<unsigned char> XorAddRoundKey);
+
 	std::vector<unsigned char> XorAddRoundKey(std::string* PlainText, std::string* Userkey);
 
 	std::vector<std::string> GetPack(void);
@@ -43,6 +44,7 @@ public:
 	void GetXorAddRoundKey(char* roundKey);
 
 	void CleanPacks(void);
+
 	AES() {
 		key_bits_numb = 0;
 
